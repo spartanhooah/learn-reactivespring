@@ -73,7 +73,7 @@ class FluxAndMonoTransformTest extends Specification {
         def stringFlux = Flux.fromIterable(["A", "B", "C", "D", "E", "F"])
             .window(6) // Creates Flux<Flux<String>> -> (A, B), (C, D), (E, F)
             .flatMap { it.map(this.&convertToList).subscribeOn(parallel()) } // <Flux<List<String>>
-            .flatMap {Flux.fromIterable(it) } // <Flux<String>>
+            .flatMap { Flux.fromIterable(it) } // <Flux<String>>
             .log()
 
         expect:
